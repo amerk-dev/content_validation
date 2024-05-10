@@ -24,7 +24,6 @@ DEVICE = "GPU" if tf.config.list_physical_devices('GPU') else "CPU"
 logging.info("TensorFlow version: %s", tf.__version__)
 logging.info("Model is using: %s", DEVICE)
 
-
 if DEVICE == "GPU":
     logging.info("GPUs available: %d", len(tf.config.list_physical_devices("GPU")))
 
