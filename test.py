@@ -1,11 +1,16 @@
-import tensorflow as tf
+from sqlmodel import SQLModel, create_engine
+from schemas import Content, Text
 
+db_name = 'valid'
+db_user = 'postgres'
+db_pass = 'admin'
 
-# Получаем список доступных физических устройств
-physical_devices = tf.config.list_physical_devices()
+db_url = f'postgresql+psycopg2://{db_user}:{db_pass}@localhost:5432/{db_name}'
+engine = create_engine(db_url, echo=True)
 
-print("Доступные физические устройства:")
-for device in physical_devices:
-    print(device)
+def create_db_and_tables():
+    SQLModel.metadata.create_all(engine)
 
-print(tf.test.is_built_with_cuda())
+if __name__ == "__main__":
+    create_db_and_tables()
+    print("Таблицы успешно созданы!")

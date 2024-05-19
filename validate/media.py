@@ -2,6 +2,9 @@ import cv2
 from transformers import pipeline
 from PIL import Image
 
+from schemas import Content, ContentCrud, Text, TextCrud
+
+
 model = pipeline("image-classification", model="falconsai/nsfw_image_detection")
 
 def frame_to_pil_image(frame):
@@ -27,10 +30,10 @@ def detect_video(video):
         "confidence_percentage": 0,
     }
 
-    with open("temp_video.mp4", "wb") as temp_file:
+    with open("../temp_video.mp4", "wb") as temp_file:
         temp_file.write(video)
 
-    video_capture = cv2.VideoCapture("temp_video.mp4")
+    video_capture = cv2.VideoCapture("../temp_video.mp4")
 
     frame_count = 0
     frame_rate = video_capture.get(cv2.CAP_PROP_FPS)

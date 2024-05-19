@@ -8,3 +8,4 @@ tensorflow==2.16.1
 tf-keras==2.16.0
 cachetools===5.3.3
 opencv-python==4.9.0.80
+openai==1.30.1
