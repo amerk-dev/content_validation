@@ -7,7 +7,7 @@ db_name = 'valid'
 db_user = 'postgres'
 db_pass = 'admin'
 
-db_url = f'postgresql+psycopg2://{db_user}:{db_pass}@localhost:5432/{db_name}'
+db_url = f'postgresql+psycopg2://{db_user}:{db_pass}@db:5432/{db_name}'
 
 
 class ContentCrud:
