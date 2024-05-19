@@ -1,0 +1,23 @@
+version: '3.12'
+
+services:
+  localhost:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: valid
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+#    command: bash -c "alembic revision --autogenerate -m 'create TextRecord table';
+#      alembic revision --autogenerate -m 'create TextRecord table';
+#      alembic upgrade head"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db

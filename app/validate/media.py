@@ -2,9 +2,6 @@ import cv2
 from transformers import pipeline
 from PIL import Image
 
-from schemas import Content, ContentCrud, Text, TextCrud
-
-
 model = pipeline("image-classification", model="falconsai/nsfw_image_detection")
 
 def frame_to_pil_image(frame):
