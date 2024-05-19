@@ -1,3 +1,34 @@
+#version: '3.12'
+#
+#services:
+#  app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    command: >
+#      bash -c "while !</dev/tcp/db/5432; do sleep 1; done;
+#      alembic upgrade head;
+#      uvicorn main:app --host 0.0.0.0 --port 8000"
+#    ports:
+#      - "8000:8000"
+#    depends_on:
+#      - db
+#    environment:
+#      DATABASE_URL: postgres+psycopg2://postgres:admin@db:5432/valid
+#
+#  db:
+#    image: postgres
+#    restart: always
+#    environment:
+#      POSTGRES_DB: valid
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: admin
+#    ports:
+#      - "5432:5432"
+#
+#volumes:
+#  db_data:
+
 version: '3.12'
 
 services:
@@ -5,16 +36,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: >
-      bash -c "while !</dev/tcp/db/5432; do sleep 1; done;
-      alembic upgrade head;
-      uvicorn main:app --host 0.0.0.0 --port 8000"
+#    command: bash -c "alembic revision --autogenerate -m 'create TextRecord table';
+#      alembic revision --autogenerate -m 'create TextRecord table';
+#      alembic upgrade head"
     ports:
       - "8000:8000"
     depends_on:
       - db
-    environment:
-      DATABASE_URL: postgres://postgres:admin@db:5432/valid
 
   db:
     image: postgres
@@ -25,6 +53,3 @@ services:
       POSTGRES_PASSWORD: admin
     ports:
       - "5432:5432"
-
-volumes:
-  db_data:

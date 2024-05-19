@@ -1,15 +1,28 @@
 import io
 import hashlib
 from fastapi import FastAPI, File, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+
 from PIL import Image
 from cachetools import Cache
-import cv2
-import tensorflow as tf
 
 from validate import detect_photo, detect_video, validate_text
 from schemas import Content, ContentCrud, Text, TextCrud
 
 app = FastAPI()
+origins = [
+    "http://localhost",
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 cache = Cache(maxsize=1000)
 
 
