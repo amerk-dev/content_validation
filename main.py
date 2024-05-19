@@ -53,6 +53,8 @@ async def classify_video(file: UploadFile):
         "is_nsfw": validation_data["is_nsfw"],
         "confidence_percentage": validation_data["confidence_percentage"],
     }
+
+    # cache[video_hash] = response_data
     return response_data
 
 
