@@ -13,6 +13,12 @@ db_url = f'postgresql+psycopg2://{db_user}:{db_pass}@db:5432/{db_name}'
 class ContentCrud:
     def __init__(self):
         self.engine = create_engine(db_url, echo=True)
+        self.ensure_tables_exist()
+    def ensure_tables_exist(self):
+        try:
+            SQLModel.metadata.create_all(self.engine)
+        except:
+            print(f"Error creating tables")
 
     def add(self, content: Content) -> Content:
         with Session(self.engine) as session:
@@ -58,7 +64,13 @@ class ContentCrud:
 class TextCrud:
     def __init__(self):
         self.engine = create_engine(db_url, echo=True)
+        self.ensure_tables_exist()
 
+    def ensure_tables_exist(self):
+        try:
+            SQLModel.metadata.create_all(self.engine)
+        except:
+            print(f"Error creating tables")
     def add(self, text: Text) -> Text:
         with Session(self.engine) as session:
             session.add(text)
